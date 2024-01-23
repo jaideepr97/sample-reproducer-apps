@@ -1,7 +1,7 @@
 #!/bin/bash
 mkdir -p "apps"
 
-for i in {1..50}
+for i in {1..100}
 do
   for j in {1..5}
   do
