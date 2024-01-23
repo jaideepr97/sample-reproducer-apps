@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sample-app-328-configmap
+  namespace: ns-66
+  labels:
+    app: sample-app-328
+data:
+  database: mongodb
+  database_uri: mongodb://localhost:27017
+  keys: |
+    image.public.key=771
+    rsa.public.key=42
