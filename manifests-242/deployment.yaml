@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sample-app-242
+  name: sample-app-242
+  namespace: ns-49
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-app-242
+  template:
+    metadata:
+      labels:
+        app: sample-app-242
+    spec:
+      containers:
+      - image: quay.io/redhatworkshops/bgd:latest
+        name: sample-app-242
+        env:
+        - name: COLOR
+          value: "blue"
+        resources: {}
