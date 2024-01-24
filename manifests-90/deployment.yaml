@@ -6,7 +6,7 @@ metadata:
   name: sample-app-90
   namespace: ns-18
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: sample-app-90

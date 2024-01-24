@@ -6,7 +6,7 @@ metadata:
   name: sample-app-443
   namespace: ns-89
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: sample-app-443
