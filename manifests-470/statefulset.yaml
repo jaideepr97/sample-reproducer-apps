@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: sample-app-470
+  name: sample-app-470
+  namespace: ns-94
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-app-470
+  serviceName: sample-app-470
+  template:
+    metadata:
+      labels:
+        app: sample-app-470
+    spec:
+      containers:
+      - image: quay.io/redhatworkshops/bgd:latest
+        name: sample-app-470
+        env:
+        - name: COLOR
+          value: "blue"
+        resources: {}

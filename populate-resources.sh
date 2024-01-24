@@ -10,9 +10,9 @@ do
     folder_name="manifests-$((5*(i-1) + j))"
     namespace="ns-$i"
     
-    mkdir -p "manifests/$folder_name"
+    mkdir -p "$folder_name"
     
-    cat <<EOF > "manifests/$folder_name/deployment.yaml"
+    cat <<EOF > "$folder_name/deployment.yaml"
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -39,7 +39,7 @@ spec:
         resources: {}
 EOF
 
-    cat <<EOF > "manifests/$folder_name/configmap.yaml"
+    cat <<EOF > "$folder_name/configmap.yaml"
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -53,6 +53,46 @@ data:
   keys: |
     image.public.key=771
     rsa.public.key=42
+EOF
+
+    cat <<EOF > "$folder_name/statefulset.yaml"
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: $app_name
+  name: $app_name
+  namespace: $namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: $app_name
+  serviceName: $app_name
+  template:
+    metadata:
+      labels:
+        app: $app_name
+    spec:
+      containers:
+      - image: quay.io/redhatworkshops/bgd:latest
+        name: $app_name
+        env:
+        - name: COLOR
+          value: "blue"
+        resources: {}
+EOF
+
+
+    cat <<EOF > "$folder_name/secret.yaml"
+apiVersion: v1
+kind: Secret
+metadata:
+  name: $app_name-secret
+  namespace: $namespace
+  labels:
+    app: $app_name
+data:
 EOF
 
 #     cat <<EOF > "manifests/$folder_name/route.yaml"
@@ -78,7 +118,7 @@ EOF
 #       type: Admitted
 # EOF
 
-    cat <<EOF > "manifests/$folder_name/service.yaml"
+    cat <<EOF > "$folder_name/service.yaml"
 apiVersion: v1
 kind: Service
 metadata:
